@@ -1,7 +1,13 @@
 <p id="notice"><%= notice %></p>
-name: <%= @user.name %> <br>
-email: <%= @user.email %> <br>
-avatar: <img src="<%= @user.avatar.url %>"
+<div class="field">
+  name: <%= @user.name %>
+</div>
+<div class="field">
+  email: <%= @user.email %>
+</div>
+<div class="field">
+  avatar: <%= image_tag @user.avatar_url if @user.avatar_url.present? %>
+</div>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>

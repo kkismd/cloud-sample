@@ -1,4 +1,4 @@
-<%= form_for(user) do |f| %>
+<%= form_for(user, url: determine_confirm_path(user), html: { multipart: true }) do |f| %>
   <% if user.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
@@ -10,12 +10,27 @@
       </ul>
     </div>
   <% end %>
-    name: <%= f.text_field :name %>  <br/>
-    email: <%= f.text_field :email %> <br/>
-    avatar: <%= f.file_field :avatar %>
+    <div class="field">
+      name: <%= f.text_field :name %>
+    </div>
+    <div class="field">
+      email: <%= f.text_field :email %>
+    </div>
+    <div class="field">
+      avatar: <%= f.file_field :avatar %>
+      <%= f.hidden_field :avatar_cache %>
+    </div>
+    <%= image_tag(user.avatar_url) if @user.avatar? %>
 
+    <%- unless user.new_record? %>
+        <div class="field">
+          <label for="remove_avatar">
+            Remove avatar: <%= f.check_box :remove_avatar %>
+          </label>
+        </div>
+    <%- end %>
 
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
 <% end %>

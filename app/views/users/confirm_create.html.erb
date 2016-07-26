@@ -1,0 +1,23 @@
+<h1>Confirm Create</h1>
+
+<%= form_for @user do |f| %>
+    <div class="field">
+      name: <%= @user.name %>
+      <%= f.hidden_field :name %>
+    </div>
+    <div class="field">
+      email: <%= @user.email %>
+      <%= f.hidden_field :email %>
+    </div>
+    <div class="field">
+      <%= image_tag @user.avatar_url if @user.avatar? %>
+      <%= f.hidden_field :avatar_cache %>
+    </div>
+    <div class="action">
+      <%= f.submit 'Back', name: 'back' %>
+    </div>
+    <div class="action">
+      <%= f.submit 'Create' %>
+    </div>
+<%- end %>
+
