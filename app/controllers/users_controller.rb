@@ -42,8 +42,8 @@ class UsersController < ApplicationController
   end
 
   def confirm_update
-    @user = User.new(user_params)
-    @user.avatar.cache! if @user.avatar?
+    @user = get_user
+    @user.assign_attributes(user_params)
     render :edit if @user.invalid?
   end
 
@@ -51,14 +51,14 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1.json
   def update
     @user = get_user
-
-    if user_params[:remove_avatar]
-      @user.remove_avatar!
+    if params[:back]
+      @user.assign_attributes(user_params)
+      return render :edit
     end
 
-    if params[:back]
-      render :edit
-    elsif @user.update(user_params)
+    @user.assign_attributes(user_params)
+    @user.remove_avatar! if user_params[:is_avatar_removing] == '1'
+    if @user.save
       redirect_to @user, notice: 'User was successfully updated.'
     else
       render :edit
@@ -81,6 +81,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :email, :avatar, :avatar_cache, :remove_avatar)
+      params.require(:user).permit(:name, :email, :avatar, :avatar_cache, :is_avatar_removing)
     end
 end

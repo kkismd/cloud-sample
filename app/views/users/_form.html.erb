@@ -22,10 +22,10 @@
     </div>
     <%= image_tag(user.avatar_url) if @user.avatar? %>
 
-    <%- unless user.new_record? %>
+    <%- if !user.new_record? && user.avatar_url.present? %>
         <div class="field">
-          <label for="remove_avatar">
-            Remove avatar: <%= f.check_box :remove_avatar %>
+          <label for="user_is_avatar_removing">
+            Remove avatar: <%= f.check_box :is_avatar_removing %>
           </label>
         </div>
     <%- end %>

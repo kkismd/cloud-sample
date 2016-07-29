@@ -10,8 +10,9 @@
       <%= f.hidden_field :email %>
     </div>
     <div class="field">
-      <%= image_tag @user.avatar_url if @user.avatar? %>
+      <%= image_tag @user.avatar_url if @user.avatar? && @user.is_avatar_removing != '1' %>
       <%= f.hidden_field :avatar_cache %>
+      <%= f.hidden_field :is_avatar_removing %>
     </div>
     <div class="action">
       <%= f.submit 'Back', name: 'back' %>

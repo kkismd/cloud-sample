@@ -1,0 +1,16 @@
+fog_api_key: 'Access key ID'
+fog_api_secret: 'Secret access key'
+fog_region: 'Region'
+fog_host: 'Host'
+fog_directory: 'Bucket name'
+fog_asset_host: 'Cache server URL'
+
+production:
+  fog_directory: 'Bucket name'
+
+development:
+  fog_directory: 'Bucket name'
+
+test:
+  fog_directory: 'Bucket name'
+
