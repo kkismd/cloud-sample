@@ -5,7 +5,7 @@ CarrierWave.configure do |config|
     aws_signature_version: 2,
     aws_access_key_id: ENV['fog_api_key'],
     aws_secret_access_key: ENV['fog_api_secret'],
-    region: ENV['ap-northeast-1'],
+    region: ENV['fog_region'],
     host: ENV['fog_host'],
   }
   config.cache_storage = :fog
